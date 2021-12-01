@@ -3,10 +3,9 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 import csv
 import numpy as np
-import string
 
 
-def read_from_csv(path: string) -> np.array:
+def read_from_csv(path: str) -> np.array:
     tweets = np.array([])
     with open(path, 'r', -1, 'utf8') as file:
         data = csv.reader(file)
@@ -29,7 +28,7 @@ def tagger(nltk_tag):
         return None
 
 
-def lemmatization(text: string) -> np.array:
+def lemmatization(text: str) -> np.array:
     wnl = WordNetLemmatizer()
     tokens_tagged = nltk.pos_tag(nltk.word_tokenize(text))
     tokens_tagged = list(map(lambda x: (x[0], tagger(x[1])), tokens_tagged))
@@ -42,7 +41,7 @@ def lemmatization(text: string) -> np.array:
     return lemmatized_text
 
 
-def lemmatize_all_csv(path: string) -> np.array:
+def lemmatize_all_csv(path: str) -> np.array:
     tweets = read_from_csv(path)
     words = np.array([])
     for tweet in tweets:
