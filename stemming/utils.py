@@ -10,7 +10,7 @@ def stem(word: str) -> str:
     return porter.stem(word)
 
 
-def stem_array(array: np.array) -> np.array:
+def stem_array(array: np.ndarray) -> np.ndarray:
     words = np.array([])
     for text in array:
         words = np.append(words, text.split())
@@ -19,7 +19,7 @@ def stem_array(array: np.array) -> np.array:
     return words
 
 
-def stem_from_csv(csv_path: str, column: int) -> np.array:
+def stem_from_csv(csv_path: str, column: int) -> np.ndarray:
     tweets = np.array([])
 
     with open(csv_path, 'r') as csv_file:
@@ -33,7 +33,7 @@ def stem_from_csv(csv_path: str, column: int) -> np.array:
     return words
 
 
-def save_to_csv(csv_path: str, words: np.array) -> None:
+def save_to_csv(csv_path: str, words: np.ndarray) -> None:
     with open(csv_path, 'w') as new_file:
         csv_writer = csv.writer(new_file)
 
