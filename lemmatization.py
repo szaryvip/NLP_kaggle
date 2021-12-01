@@ -1,6 +1,16 @@
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
+import csv
+
+
+def read_from_csv(path):
+    tweets = []
+    with open(path, 'r', -1, 'utf8') as file:
+        data = csv.reader(file)
+        for row in data:
+            tweets.append(row[3])
+    return tweets
 
 
 def tagger(nltk_tag):
@@ -23,13 +33,17 @@ def lemmatization(text):
     lemmatized_text = []
     for word, tag in tokens_tagged:
         if tag is None:
-            lemmatized_text.append(word)
+            lemmatized_text.append((word, word))
         else:
-            lemmatized_text.append(wnl.lemmatize(word, tag))
+            lemmatized_text.append((word, wnl.lemmatize(word, tag)))
     return lemmatized_text
 
 
 if __name__ == "__main__":
-    text = "the bats saw the cats with best stripes hanging upside down by their feet"
+    text = "the bats saw sawing the cats with best stripes hanging upside down by their feet"
     lemmatized_tokens = lemmatization(text)
     print(lemmatized_tokens)
+    tweets = read_from_csv("data/train.csv")
+    for tweet in tweets:
+        print(lemmatization(tweet))
+        
