@@ -37,7 +37,8 @@ def lemmatization(text: str) -> np.array:
         if tag is None:
             lemmatized_text = np.append(lemmatized_text, word)
         else:
-            lemmatized_text = np.append(lemmatized_text, wnl.lemmatize(word, tag))
+            lemmatized_text = np.append(
+                lemmatized_text, wnl.lemmatize(word, tag))
     return lemmatized_text
 
 
@@ -54,4 +55,3 @@ if __name__ == "__main__":
     text = "the bats saw sawing the cats with best stripes hanging upside down by their feet"
     print(lemmatization(text))
     print(lemmatize_all_csv("data/train.csv"))
-        
