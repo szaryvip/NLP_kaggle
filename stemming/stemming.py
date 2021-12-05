@@ -1,8 +1,12 @@
+import bag_of_words
+from normalization import normalization
+import typing
 import numpy as np
 import nltk
 from nltk.stem import PorterStemmer
 import csv
-import typing
+import sys
+sys.path.insert(0, '..')
 
 
 def stem(word: str) -> str:
@@ -39,3 +43,11 @@ def save_to_csv(csv_path: str, words: np.ndarray) -> None:
 
         for i in words:
             csv_writer.writerow([i])
+
+
+def stem_normalize_from_to_csv(from_path: str, to_path: str) -> None:
+    words = stem_from_csv(from_path, 3)
+    bag_of_words.create_bag_of_words(words)
+    indexes = np.arange(words.size)
+    stacked_words = np.stack((indexes, words), axis=1)
+    normalization.normalize(stacked_words, to_path)
